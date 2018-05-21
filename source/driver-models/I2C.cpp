@@ -120,12 +120,15 @@ int I2C::read(AcknowledgeType ack)
   *
   * @return DEVICE_OK on success, DEVICE_I2C_ERROR if the the write request failed.
   */
+  
   int I2C::write(uint16_t address, uint8_t *data, int len, bool repeated)
   {
       if (data == NULL || len <= 0)
           return DEVICE_INVALID_PARAMETER; // Send a start condition
 
-      start();
+      if (start() != DEVICE_OK) {
+          return DEVICE_I2C_ERROR;
+      }
 
       // Send the address of the slave, with a write bit set.
       write((uint8_t)address);
@@ -140,6 +143,7 @@ int I2C::read(AcknowledgeType ack)
 
       return DEVICE_OK;
   }
+  
 
   /**
   * Performs a typical register write operation to the I2C slave device provided.

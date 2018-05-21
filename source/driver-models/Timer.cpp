@@ -73,6 +73,7 @@ void Timer::releaseTimerEvent(TimerEvent *event)
  */
 Timer::Timer()
 {
+    //DMESG("timer constructor");
     // Register ourselves as the defualt timer - most recent timer wins.
     system_timer = this;
 
@@ -93,9 +94,10 @@ Timer::Timer()
  *
  * @return the timestamp in milliseconds
  */
-CODAL_TIMESTAMP Timer::getTime()
+unsigned int Timer::getTime()
 {
     syncRequest();
+    //DMESG("getTime(), %d", (int)currentTime);
     return currentTime;
 }
 
@@ -223,11 +225,13 @@ int Timer::eventEveryUs(CODAL_TIMESTAMP period, uint16_t id, uint16_t value)
  * Callback from physical timer implementation code.
  * @param t Indication that t time units (typically microsends) have elapsed.
  */
-void Timer::sync(CODAL_TIMESTAMP t)
+void Timer::sync(CODAL_TIMESTAMP ts)
 {
+    //DMESG("sync: %d", (int)ts);
     // First, update our timestamps.
-    currentTimeUs += t;
-    overflow += t;
+    currentTimeUs += ts;
+    overflow += ts;
+    //currentTime += ts / 1000;
     currentTime += overflow / 1000;
     overflow = overflow % 1000;
 }
@@ -308,10 +312,12 @@ Timer::~Timer()
   *
   * @return the current time since power on in milliseconds
   */
-CODAL_TIMESTAMP codal::system_timer_current_time()
+unsigned int codal::system_timer_current_time()
 {
-    if(system_timer == NULL)
+    
+    if(system_timer == NULL) {
         return 0;
+    }
 
     return system_timer->getTime();
 }

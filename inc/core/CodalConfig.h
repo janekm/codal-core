@@ -66,7 +66,7 @@ DEALINGS IN THE SOFTWARE.
 #endif
 
 #ifndef CODAL_TIMESTAMP
-#define CODAL_TIMESTAMP                       uint32_t
+#define CODAL_TIMESTAMP                       uint64_t
 #endif
 
 //

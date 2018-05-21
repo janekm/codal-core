@@ -65,7 +65,7 @@ namespace codal
           *
           * @return the timestamp in milliseconds
           */
-        CODAL_TIMESTAMP getTime();
+        unsigned int getTime();
 
         /**
           * Retrieves the current time tracked by this Timer instance
@@ -197,7 +197,7 @@ namespace codal
      *
      * @return the current time since power on in milliseconds
      */
-    CODAL_TIMESTAMP system_timer_current_time();
+    unsigned int system_timer_current_time();
 
     /**
      * Determines the time since the device was powered on.

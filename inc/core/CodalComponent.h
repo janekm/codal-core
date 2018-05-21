@@ -53,6 +53,8 @@ DEALINGS IN THE SOFTWARE.
 #define DEVICE_ID_SYSTEM_LEVEL_DETECTOR 21
 #define DEVICE_ID_MSC 22
 
+#define DEVICE_RADIO_EVT_DATAGRAM 1024
+
 #define DEVICE_ID_IO_P0               100                       // IDs 100-227 are reserved for I/O Pin IDs.
 
 #define DEVICE_ID_MESSAGE_BUS_LISTENER            1021          // Message bus indication that a handler for a given ID has been registered.
